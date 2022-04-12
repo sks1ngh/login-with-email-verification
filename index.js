@@ -128,7 +128,7 @@ app.post("/register", async function (req, res) {
   let userExists = await User.findOne({ email: email });
   let validEmail = validator.validate(email);
   if (!validEmail) {
-    res.render("Email invalid. Please try <a href='/register'>again</a>");
+    res.send("Email invalid. Please try <a href='/register'>again</a>");
   }
   if (userExists === null) {
     const newUser = new User({
