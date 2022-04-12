@@ -136,11 +136,13 @@ app.post("/register", async function (req, res) {
     await newUser
       .save()
       .then((data) => {
-        res.send("User registered successfully!");
+        res.send(
+          "User registered successfully, please <a href='/login'>login!</a>"
+        );
       })
       .catch((err) => console.log(err));
   } else {
-    res.send("User already exits, please login!");
+    res.send("User already exits, please <a href='/login'>login!</a>");
   }
 });
 
@@ -153,7 +155,9 @@ app.post("/login", async function (req, res) {
     res.cookie("loggedin", "1");
     res.redirect("/userProfile");
   } else {
-    res.send("Wrong email or password, try again!");
+    res.send(
+      "Wrong email or password, please <a href='/login'>login</a> again!"
+    );
   }
 });
 
@@ -173,7 +177,9 @@ app.post("/verifyEmail", checkLogin, async function (req, res) {
       await User.findOneAndUpdate(filter, update, [[(overwrite = true)]]);
       res.redirect("/userProfile");
     } else {
-      res.send("Wrong Code entered, please try again!");
+      res.send(
+        "Wrong Code entered, please try <a href='/userProfile'>again!</a>"
+      );
     }
   } else {
     res.redirect("/login");
