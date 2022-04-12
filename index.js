@@ -1,14 +1,14 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const ejs = require("ejs");
-const creds = require("./keys");
 const User = require("./db/mongo-setup");
 const mongoose = require("mongoose");
 var cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const md5 = require("md5");
 const Cryptr = require("cryptr");
-const cryptr = new Cryptr(creds.cryptrKey);
+const cryptr = new Cryptr(process.env.CRYPTRKEY);
 const nodemailer = require("nodemailer");
 
 app.set("view engine", "ejs");
@@ -64,8 +64,8 @@ async function isVerified(req, res, next) {
       port: 465,
       secure: true, // true for 465, false for other ports
       auth: {
-        user: creds.gmailID, // generated ethereal user
-        pass: creds.gmailPass, // generated ethereal password
+        user: process.env.GMAILID, // generated ethereal user
+        pass: process.env.GMAILPASS, // generated ethereal password
       },
     });
     let info = await transporter.sendMail({
@@ -106,7 +106,7 @@ app.listen(process.env.PORT || 3000, server_host, function () {
   console.log("Server started on port 3000");
 });
 
-mongoose.connect(creds.mongoURL, function () {
+mongoose.connect(process.env.MONGOURL, function () {
   console.log("Connected to database");
 });
 
