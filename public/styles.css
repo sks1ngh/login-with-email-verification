@@ -1,0 +1,11 @@
+.main {
+  margin-top: 40vh;
+  text-align: center;
+}
+
+a {
+  border: 3px solid black;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+}
