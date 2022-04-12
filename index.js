@@ -127,27 +127,29 @@ app.post("/register", async function (req, res) {
   let { firstname, lastname, email, password } = req.body;
   let userExists = await User.findOne({ email: email });
   let validEmail = validator.validate(email);
+  console.log(validEmail);
   if (!validEmail) {
     res.send("Email invalid. Please try <a href='/register'>again</a>");
-  }
-  if (userExists === null) {
-    const newUser = new User({
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      password: password,
-    });
-
-    await newUser
-      .save()
-      .then((data) => {
-        res.send(
-          "User registered successfully, please <a href='/login'>login!</a>"
-        );
-      })
-      .catch((err) => console.log(err));
   } else {
-    res.send("User already exits, please <a href='/login'>login!</a>");
+    if (userExists === null) {
+      const newUser = new User({
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password,
+      });
+
+      await newUser
+        .save()
+        .then((data) => {
+          res.send(
+            "User registered successfully, please <a href='/login'>login!</a>"
+          );
+        })
+        .catch((err) => console.log(err));
+    } else {
+      res.send("User already exits, please <a href='/login'>login!</a>");
+    }
   }
 });
 
