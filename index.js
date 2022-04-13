@@ -197,7 +197,7 @@ app.post("/verifyEmail", checkLogin, async function (req, res) {
 app.get("/logout", function (req, res) {
   res.clearCookie("user");
   res.clearCookie("loggedin");
-  res.render("logout");
+  res.redirect("/");
 });
 
 app.use("", function (req, res) {
