@@ -1,23 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
     <link rel="stylesheet" href="styles.css" />
     <title>Login</title>
-  </head>
-  <body>
-    <div class="main">
-      <h1>Login Page</h1>
-      <form action="/login" method="post">
-        <label for="email">Email</label>
-        <input name="email" id="email" type="email" required />
-        <label for="password">Password</label>
-        <input name="password" id="password" type="password" required />
-        <button type="submit">Login</button>
-        <a href="/register">Register</a>
-      </form>
+</head>
+
+<body class="grad">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!-- Container wrapper -->
+        <div class="container">
+
+
+            <!-- Toggle button -->
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+
+                <div class="d-flex align-items-center">
+                    
+                    </a>
+
+                    <a href="/register">
+                        <button type="button" class="btn btn-light px-3 me-2">
+              Register
+            </button></a>
+                   
+                </div>
+            </div>
+            <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <div class="login-holder">
+        <h1 style="padding-bottom: 5%">Login</h1>
+
+        <%if (valid === false){%>
+            <div class="red">
+                <p>Incorrect crednetials, please try again!</p>
+            </div>
+            <br />
+            <%}%>
+
+                <form action="/login" method="post" class="needs-validation" novalidate>
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input type="email" id="validationCustom01" class="form-control" name="email" required autofocus />
+                        <label class="form-label" for="validationCustom01">Email</label>
+
+                        <div class="invalid-feedback">Please enter a valid email.</div>
+                    </div>
+                    <br />
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input type="password" id="form2Example2" class="form-control" name="password" required />
+                        <label class="form-label" for="form2Example2">Password</label>
+                        <div class="invalid-feedback">Cannot proceed with a password!</div>
+                    </div>
+                    <br />
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-dark btn-block mb-4">
+          Sign in
+        </button>
+
+                    <!-- Register buttons -->
+                    <div class="text-center">
+                        <p>Not a user? <a href="/register">Register</a></p>
+                    </div>
+                </form>
     </div>
-  </body>
+
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script>
+        window.addEventListener("load", function() {
+            let inputs = document.querySelectorAll("input");
+            inputs.forEach((input) => {
+                input.value = "";
+            });
+        });
+    </script>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+            "use strict";
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll(".needs-validation");
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms).forEach((form) => {
+                form.addEventListener(
+                    "submit",
+                    (event) => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add("was-validated");
+                    },
+                    false
+                );
+            });
+        })();
+    </script>
+</body>
+
 </html>

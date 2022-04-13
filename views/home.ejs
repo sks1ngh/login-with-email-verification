@@ -4,14 +4,82 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
     <link rel="stylesheet" href="styles.css" />
-    <title>Homepage</title>
+    <title>Login</title>
   </head>
-  <body>
-    <div class="main">
-      <h1>Hello ! Kindly login / register below!</h1>
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
+
+  <body class="grad">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <!-- Container wrapper -->
+      <div class="container">
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarButtonsExample"
+          aria-controls="navbarButtonsExample"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+          <!-- Left links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+          </ul>
+          <!-- Left links -->
+
+          <div class="d-flex align-items-center">
+            <a href="/login">
+              <button type="button" class="btn btn-light px-3 me-2">
+                Login
+              </button>
+            </a>
+
+            <a href="/register">
+              <button type="button" class="btn btn-light px-3 me-2">
+                Register
+              </button></a
+            >
+            <!-- <a class="btn btn-dark px-3" href="https://github.com/mdbootstrap/mdb-ui-kit" role="button"><i class="fab fa-github"></i></a> -->
+          </div>
+        </div>
+        <!-- Collapsible wrapper -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+    <div class="login-holder">
+      <h1 class="home-h1">Welcome to the website!</h1>
+      <div class="buttons">
+        <a href="/login">
+          <button type="button" class="btn btn-dark px-3 me-2">Login</button>
+        </a>
+        <a href="/register">
+          <button type="button" class="btn btn-dark px-3 me-2">Register</button>
+        </a>
+      </div>
     </div>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
   </body>
 </html>

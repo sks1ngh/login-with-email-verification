@@ -4,32 +4,183 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
     <link rel="stylesheet" href="styles.css" />
     <title>Register</title>
   </head>
-  <body>
-    <div class="main">
-      <h1>Register Page</h1>
-      <form action="/register" method="post">
-        <label for="firstname">First name*</label>
-        <input name="firstname" id="firstname" type="string" required />
+
+  <body class="grad">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <!-- Container wrapper -->
+      <div class="container">
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarButtonsExample"
+          aria-controls="navbarButtonsExample"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+          <!-- Left links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+          </ul>
+          <!-- Left links -->
+
+          <div class="d-flex align-items-center">
+            <a href="/login">
+              <button type="button" class="btn btn-white px-3 me-2">
+                Login
+              </button>
+            </a>
+          </div>
+        </div>
+        <!-- Collapsible wrapper -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <div class="login-holder">
+      <h1>Register</h1>
+
+      <%if (emailValid === false){%>
+      <br />
+      <div class="red">
+        <p>Invalid email, please enter a valid email address!</p>
+      </div>
+      <%}%> <%if (userExists === true){%>
+      <br />
+      <div class="red">
+        <p>User already exits, please <a href="/login">login!</a></p>
+      </div>
+      <%}%>
+      <br />
+      <form
+        action="/register"
+        method="post"
+        class="needs-validation"
+        novalidate
+      >
+        <div class="form-outline mb-4">
+          <input
+            type="text"
+            id="form2Example1"
+            class="form-control"
+            name="firstname"
+            required
+            autocomplete="name"
+          />
+          <label class="form-label" for="form2Example2">First name</label>
+          <div class="invalid-feedback">
+            Cannot proceed without a firstname!
+          </div>
+        </div>
         <br />
+
+        <div class="form-outline mb-4">
+          <input
+            type="text"
+            id="form2Example2"
+            class="form-control"
+            name="lastname"
+            required
+            autocomplete="family-name"
+          />
+          <label class="form-label" for="form2Example2">Last name</label>
+          <div class="invalid-feedback">Cannot proceed without a lastname!</div>
+        </div>
         <br />
-        <label for="lastname">Last name*</label>
-        <input name="lastname" id="lastname" type="string" required />
+
+        <div class="form-outline mb-4">
+          <input
+            type="email"
+            id="form2Example3"
+            class="form-control"
+            name="email"
+            required
+            autocomplete="email"
+          />
+          <label class="form-label" for="form2Example2">Email</label>
+          <div class="invalid-feedback">Cannot proceed without an email!</div>
+        </div>
         <br />
+
+        <div class="form-outline mb-4">
+          <input
+            type="password"
+            id="form2Example4"
+            class="form-control"
+            name="password"
+            required
+          />
+          <label class="form-label" for="form2Example2">Password</label>
+          <div class="invalid-feedback">Cannot proceed with a password!</div>
+        </div>
         <br />
-        <label for="email">Email*</label>
-        <input name="email" id="email" type="email" required />
-        <br />
-        <br />
-        <label for="password">Password*</label>
-        <input name="password" id="password" type="password" required />
-        <br />
-        <br />
-        <button type="submit">Register</button>
-        <a href="login">Login</a>
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-dark btn-block mb-4">
+          Register
+        </button>
+
+        <!-- Register buttons -->
+        <div class="text-center">
+          <p>Already a user ? <a href="/login">Login</a></p>
+        </div>
       </form>
     </div>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script>
+      window.addEventListener("load", function () {
+        let inputs = document.querySelectorAll("input");
+        inputs.forEach((input) => {
+          input.value = "";
+        });
+      });
+    </script>
+
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (() => {
+        "use strict";
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll(".needs-validation");
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+    </script>
   </body>
 </html>

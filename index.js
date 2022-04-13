@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
   res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
   res.setHeader("Pragma", "no-cache");
-  res.setHeader("Expires", "0");
+  res.setHeader("Expires", "-1");
   next();
 });
 app.use(cookieParser());
@@ -116,11 +116,11 @@ app.get("/", redirect, function (req, res) {
 });
 
 app.get("/login", redirect, function (req, res) {
-  res.render("login");
+  res.render("login", { valid: true });
 });
 
 app.get("/register", redirect, function (req, res) {
-  res.render("register");
+  res.render("register", { emailValid: true, userExists: false });
 });
 
 app.post("/register", async function (req, res) {
@@ -129,7 +129,7 @@ app.post("/register", async function (req, res) {
   let validEmail = validator.validate(email);
   console.log(validEmail);
   if (!validEmail) {
-    res.send("Email invalid. Please try <a href='/register'>again</a>");
+    res.render("register", { emailValid: validEmail, userExists: false });
   } else {
     if (userExists === null) {
       const newUser = new User({
@@ -148,7 +148,10 @@ app.post("/register", async function (req, res) {
         })
         .catch((err) => console.log(err));
     } else {
-      res.send("User already exits, please <a href='/login'>login!</a>");
+      res.render("register", {
+        emailValid: true,
+        userExists: true,
+      });
     }
   }
 });
@@ -162,9 +165,7 @@ app.post("/login", async function (req, res) {
     res.cookie("loggedin", "1");
     res.redirect("/userProfile");
   } else {
-    res.send(
-      "Wrong email or password, please <a href='/login'>login</a> again!"
-    );
+    res.render("login", { valid: false });
   }
 });
 
