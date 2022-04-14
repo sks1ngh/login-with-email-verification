@@ -317,45 +317,53 @@ app.get("/editPassword", checkLogin, isVerified, async function (req, res) {
     wrongCurrentPassword: false,
     differentPasswords: false,
     success: false,
+    validPass: true,
   });
 });
 
 app.post("/editPassword", checkLogin, isVerified, async function (req, res) {
-  var { email } = res.locals.userInfo;
+  var { email, password } = res.locals.userInfo;
   var { currentPassword, newPassword, verifyNewPassword } = req.body;
-  if (newPassword !== verifyNewPassword) {
-    res.render("editPassword", {
-      wrongCurrentPassword: false,
-      differentPasswords: true,
-      success: false,
-    });
-  } else {
-    var userPassword = await User.findOne({ email: email });
-    var checkPass = await bcrypt.compare(
-      currentPassword,
-      userPassword.password
-    );
-    if (checkPass === false) {
-      res.render("editPassword", {
-        wrongCurrentPassword: true,
-        differentPasswords: false,
-        success: false,
-      });
+  var validPass = schema.validate(newPassword);
+  var checkPass = await bcrypt.compare(currentPassword, password);
+  if (checkPass === true) {
+    if (newPassword === verifyNewPassword) {
+      if (validPass === true) {
+        var password = await bcrypt.hash(newPassword, saltrounds);
+        let filter = { email: email };
+        let update = {
+          password: password,
+        };
+        await User.findOneAndUpdate(filter, update, [[(overwrite = true)]]);
+        res.render("editPassword", {
+          wrongCurrentPassword: false,
+          differentPasswords: false,
+          validPass: true,
+          success: true,
+        });
+      } else {
+        res.render("editPassword", {
+          wrongCurrentPassword: false,
+          differentPasswords: false,
+          success: false,
+          validPass: false,
+        });
+      }
     } else {
-      let password = await bcrypt.hash(newPassword, saltrounds);
-      let filter = { email: email };
-      let update = {
-        password: password,
-      };
-      await User.findOneAndUpdate(filter, update, [[(overwrite = true)]]);
       res.render("editPassword", {
         wrongCurrentPassword: false,
-        differentPasswords: false,
-        success: true,
+        differentPasswords: true,
+        success: false,
+        validPass: true,
       });
-      {
-      }
     }
+  } else {
+    res.render("editPassword", {
+      wrongCurrentPassword: true,
+      differentPasswords: false,
+      success: false,
+      validPass: true,
+    });
   }
 });
 
