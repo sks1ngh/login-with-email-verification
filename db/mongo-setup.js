@@ -1,3 +1,4 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -17,6 +18,14 @@ const UserSchema = Schema({
   password: {
     type: String,
     required: [true, "No password specified"],
+  },
+  gender: {
+    type: String,
+    default: "-",
+  },
+  birthday: {
+    type: String,
+    default: "-",
   },
   emailVerified: {
     type: Boolean,

@@ -60,7 +60,7 @@
       </div>
       <!-- Container wrapper -->
     </nav>
-    <div class="login-holder">
+    <div class="login-holder" style="padding-top: 0%;">
       <h1>Register</h1>
 
       <%if (emailValid === false){%>
@@ -68,12 +68,22 @@
       <div class="red">
         <p>Invalid email, please enter a valid email address!</p>
       </div>
-      <%}%> <%if (userExists === true){%>
+      <%}%> <%if (userExists === true && validPass === true){%>
       <br />
       <div class="red">
         <p>User already exits, please <a href="/login">login!</a></p>
       </div>
-      <%}%>
+      <%}%><%if (validPass === false){%>
+      <br />
+      <div class="red">
+        <p>Password must be atleast 8 characters long, and must contain uppercase, lowercase, numbers. No spaces are allowed!</a></p>
+      </div>
+      <%}%><%if (success === true){%>
+        <br />
+        <div class="green">
+          <p>User registered successfully! please login!</p>
+        </div>
+        <%}%>
       <br />
       <form
         action="/register"

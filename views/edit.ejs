@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <title><%=firstName%> | Edit</title>
+  </head>
+  <body>
+    <div class="login-holder" style="padding: 1%">
+      <h1>Edit Profile</h1>
+
+      <br />
+      <form action="/edit" method="post" class="needs-validation" novalidate>
+        <div class="form-outline mb-4">
+          <input
+            type="text"
+            id="form2Example1"
+            class="form-control"
+            name="firstname"
+            required
+            autocomplete="name"
+            value="<%=firstName%>"
+          />
+          <label class="form-label" for="form2Example2">First name</label>
+          <div class="invalid-feedback">
+            Cannot proceed without a firstname!
+          </div>
+        </div>
+        <br />
+
+        <div class="form-outline mb-4">
+          <input
+            type="text"
+            id="form2Example2"
+            class="form-control"
+            name="lastname"
+            required
+            autocomplete="family-name"
+            value="<%=lastName%>"
+          />
+          <label class="form-label" for="form2Example2">Last name</label>
+          <div class="invalid-feedback">Cannot proceed without a lastname!</div>
+        </div>
+        <br />
+
+        <div class="form-outline mb-4">
+          <input class="form-check-input" type="radio" name="gender"
+          id="flexRadioDefault1" value="Male" <%if(gender==="Male"){%> checked
+          <%}%> />
+          <label class="form-check-label" for="flexRadioDefault1"> Male </label>
+
+          <!-- Default checked radio -->
+
+          <input class="form-check-input" type="radio" name="gender"
+          id="flexRadioDefault2" value="Female" <%if(gender==="Female"){%>
+          checked <%}%> />
+          <label class="form-check-label" for="flexRadioDefault2">
+            Female
+          </label>
+        </div>
+
+        <input
+          min="1940-01-01"
+          max="2003-12-31"
+          class="form-check-input"
+          type="date"
+          id="birthday"
+          value="<%=birthday%>"
+          name="birthday"
+          required
+          style="width: 20%"
+        />
+
+        <br />
+        <br />
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-dark btn-block mb-4">
+          Update
+        </button>
+
+        <a href="/userProfileEdit"
+          ><button type="button" class="btn btn-light btn-block mb-4">
+            Cancel
+          </button></a
+        >
+      </form>
+    </div>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (() => {
+        "use strict";
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll(".needs-validation");
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+    </script>
+  </body>
+</html>

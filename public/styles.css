@@ -1,38 +1,67 @@
 .login-holder {
-    width: 30%;
-    height: 70%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+  padding: 5%;
+  width: 50%;
+  height: 70%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .red {
-    background-color: rgb(255, 181, 181);
+  background-color: rgb(255, 181, 181);
 }
 
 .red p {
-    padding: 1%;
+  padding: 1%;
+}
+
+.green {
+  background-color: rgb(143, 255, 171);
+}
+
+.green p {
+  padding: 1%;
 }
 
 .home-h1 {
-    position: relative;
-    top: 30%;
-    color: rgb(71, 71, 71);
+  text-align: center;
+  position: relative;
+  top: 30%;
+  color: rgb(71, 71, 71);
 }
 
 .grad {
-    background: url("bg.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  background: url("bg.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .buttons {
-    text-align: center;
-    position: relative;
-    top: 30%;
+  text-align: center;
+  position: relative;
+  top: 30%;
+}
+
+.userInfo {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.userInfoDiv {
+  padding-top: 5%;
+}
+
+.userInfoDiv h1 {
+  display: inline-block;
+}
+
+@media screen and (max-width: 768px) {
+  .login-holder {
+    padding: 5%;
+    width: 100%;
+  }
 }

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Change Email</title>
+  </head>
+  <body>
+    <div class="login-holder" style="padding: 1%">
+      <h1>Change Email</h1>
+
+      <br />
+      <%if(invalidEmail === true){%>
+      <div class="red">
+        <p>Invalid email!</p>
+      </div>
+      <%}else if (alreadyVerified === true && emailAlreadyUsed === true){%>
+      <div class="red">
+        <p>Please use a different email!</p>
+      </div>
+      <%}%>
+
+      <form
+        action="/editEmail"
+        method="post"
+        class="needs-validation"
+        novalidate
+      >
+        <div class="form-outline mb-4">
+          <input
+            type="email"
+            id="form2Example1"
+            class="form-control"
+            name="newEmail"
+            required
+          />
+          <label class="form-label" for="form2Example2">New Email</label>
+          <div class="invalid-feedback">
+            Cannot proceed without the new email!
+          </div>
+        </div>
+        <br />
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-dark btn-block mb-4">
+          Change Email
+        </button>
+
+        <a href="/userProfileEdit"
+          ><button type="button" class="btn btn-light btn-block mb-4">
+            Login again!
+          </button></a
+        >
+      </form>
+    </div>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+
+    <script>
+      window.addEventListener("load", function () {
+        let inputs = document.querySelectorAll("input");
+        inputs.forEach((input) => {
+          input.value = "";
+        });
+      });
+    </script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (() => {
+        "use strict";
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll(".needs-validation");
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+    </script>
+  </body>
+</html>
